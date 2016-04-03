@@ -1,0 +1,24 @@
+.operator{
+	width: 30px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+	border-bottom: 1px gray solid;
+	font-size: 17px;
+}
+.operator:focus{
+	background: white;
+}
+.operator:hover{
+	background-color: whitesmoke;
+}
+.border-dashed{
+	border-right:1px gray dashed;
+}
+.table-values tr td{
+	background: white;
+	transition: 0.5s all;
+}
+.table-values tr td.value-change{
+	background: rgba(77, 182, 172, 0.5);
+}
