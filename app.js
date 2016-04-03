@@ -23,17 +23,29 @@ var operators = [
 	}
 ];
 window.onload = function () {
-	$('.operator').click(onClick);
+	$('.operator').click(onClickOperator);
+	$('.variable').click(onClickVariable);
 	operateAll();
 }
-function onClick() {
+function onClickVariable() {
+	var not = this.getAttribute('data-not') === TRUE;
+	if (not) {
+		this.setAttribute('data-not', FALSE);
+		this.textContent = this.textContent.replace('¬', '');
+	} else {
+		this.setAttribute('data-not', TRUE);
+		this.textContent = '¬' + this.textContent;
+	}
+	operateAll();
+}
+function onClickOperator() {
 	var next = this.getAttribute('data-operator');
 	next = Number(next) + 1;
 	console.log(next);
-	this.textContent = operators[next].text;
-	if (next >= 4) {
+	if (next > 3) {
 		next = 0;
 	}
+	this.textContent = operators[next].text;
 	console.log(next);
 	this.setAttribute('data-operator', next);
 	operateAll();
@@ -55,8 +67,12 @@ function setVal(id, val) {
 }
 function getOperator(num) {
 	num = document.getElementById('operator' + num).getAttribute('data-operator');
-	console.log(num, operators[num].operator.name);
 	return operators[num].operator;
+}
+function variableNot(num) {
+	var el = document.getElementById('variable' + num),
+		not = el.getAttribute('data-not') === TRUE;
+	return not;
 }
 function operateAll() {
 	var p, q, r;
@@ -71,15 +87,36 @@ function operateLine(p, q, r, index) {
 	var operator0 = getOperator(0),
 		operator1 = getOperator(1),
 		operator2 = getOperator(2),
-		result0,
-		result1,
-		result2;
+		result0, result1, result2,
+		tempP, tempQ, tempR;
 
-	result0 = operator0(p, q);
+	if (variableNot(0)) {
+		tempP = negacion(p);
+	} else {
+		tempP = p;
+	}
+	if (variableNot(1)) {
+		tempQ = negacion(q);
+	} else {
+		tempQ = q;
+	}
+	result0 = operator0(tempP, tempQ);
 	setVal(index + '3', result0);
 
-	result1 = operator1(q, r);
+
+	if (variableNot(2)) {
+		tempQ = negacion(q);
+	} else {
+		tempQ = q;
+	}
+	if (variableNot(3)) {
+		tempR = negacion(r);
+	} else {
+		tempR = r;
+	}
+	result1 = operator1(tempQ, tempQ);
 	setVal(index + '5', result1);
+
 	result2 = operator2(result0, result1);
 	setVal(index + '4', result2);
 

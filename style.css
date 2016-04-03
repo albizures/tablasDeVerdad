@@ -1,15 +1,14 @@
-.operator{
+.operator, .variable{
 	width: 30px;
   padding: 0;
   background: transparent;
   border: 0;
-	border-bottom: 1px gray solid;
 	font-size: 17px;
 }
-.operator:focus{
+.operator:focus, .variable:focus{
 	background: white;
 }
-.operator:hover{
+.operator:hover, .variable:hover{
 	background-color: whitesmoke;
 }
 .border-dashed{
