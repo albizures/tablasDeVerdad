@@ -21,3 +21,6 @@
 .table-values tr td.value-change{
 	background: rgba(77, 182, 172, 0.5);
 }
+h3{
+	text-shadow: 0 2px 0 rgba(255, 255, 255, 0.5);
+}
